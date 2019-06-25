@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> BankSearch</title>
+    <link rel = "icon" href ="bank1.jpg" type = "image/x-icon"> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ <style> 
+    
+ body {
+ padding-left:50px;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  position:static;
+  bottom: 10;
+  width: 76%;
+  align:left;
+  padding-left:60px;
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navbar a:hover {
+  background: #f1f1f1;
+  color: black;
+}
+
+.navbar a.active {
+  color: white;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.sidenav {
+margin-top:150px;
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav a {
+  align:center;
+  padding: 6px 6px ;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 40%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+
+.dropbtn {
+  background-color: black;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: black;
+}
+
+#myTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px;
+}
+
+#myTable th, #myTable td {
+  text-align: left;
+  padding: 12px;
+}
+
+#myTable tr {
+  border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+  background-color: #f1f1f1;
+}
+.sidenav a:hover {
+  color: blue;
+}
+
+.main {
+  margin-left: 200px; /* Same as the width of the sidenav */
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.sri {
+  margin-left: 300px; /* Same as the width of the sidenav */
+}
+a:active {
+  background-color: yellow;
+}
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+.active {
+ background-color: lightgrey;
+} 
+
+
+
+.center {
+  text-align: center;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+    </style>
+<script>
+function ajaxcall(){
+
+    $.ajax({url: "https://vast-shore-74260.herokuapp.com/banks?city=MUMBAI", success: function(result){
+    var rows = result;
+    console.log(result)
+ var html = '<table id= "myTable">';
+ html += '<tr>';
+  html += '<th>' + "IFSC" + '</th>';
+  html += '<th>' + "BANKID" + '</th>';
+    html += '<th>' + "BRANCH" + '</th>';
+	    html += '<th>' + "ADDRESS" + '</th>';
+    html += '<th>' + "CITY" + '</th>';
+      html += '<th>' + "DISTRICT" + '</th>';
+  			    html += '<th>' + "STATE" + '</th>';
+  			    html += '<th>' + "BANKNAME" + '</th>';
+
+ html += '</tr>';
+ for( var i = 0; i < rows.length; i++) {
+  html += '<tr>';
+  for( var j in rows[i] ) {
+    html += '<td>' + rows[i][j] + '</td>';
+  }
+ }
+ html += '</table>';
+ document.getElementById('container').innerHTML = html;;
+    }});
+  
+}
+ajaxcall();
+
+
+
+
+function myFunction() {
+	
+	  var input, filter, table, tr, td, i,j, sno;
+	  input = document.getElementById("myInput");
+	  input1=document.getElementById("mySelect");
+	  input2=document.getElementById("mySelect1");
+	  filter = input.value.toUpperCase();
+	  filter1 = input1.value.toUpperCase();
+	  	  filter2 = input2.value.toUpperCase();
+	  table = document.getElementById("myTable");
+	  
+	  tr = table.getElementsByTagName("tr");
+	  for (i = 0; i < tr.length; i++) {
+	  	    td = tr[i].getElementsByTagName("td")[0];
+	    td1 = tr[i].getElementsByTagName("td")[1];
+		td2 = tr[i].getElementsByTagName("td")[2];
+		td3 = tr[i].getElementsByTagName("td")[3];
+		td4 = tr[i].getElementsByTagName("td")[4];
+		td5 = tr[i].getElementsByTagName("td")[5];
+		td6 = tr[i].getElementsByTagName("td")[6];
+		td7 = tr[i].getElementsByTagName("td")[7];
+	    if (td ) 	
+		{
+		 ifsc = td.textContent;
+		 bankid=td1.textContent;
+		branch=td2.textContent;
+		address=td3.textContent;
+		city=td4.textContent;
+		district=td5.textContent;
+		state=td6.textContent;
+		bankname=td7.textContent;
+	      if (ifsc.toUpperCase().indexOf(filter) > -1 || 
+	    		  bankid.toUpperCase().indexOf(filter) > -1 || branch.toUpperCase().indexOf(filter) > -1 ||
+	    		  address.toUpperCase().indexOf(filter) > -1 || city.toUpperCase().indexOf(filter) > -1 ||
+	    		  district.toUpperCase().indexOf(filter) > -1 || state.toUpperCase().indexOf(filter) > -1 ||
+	    		  bankname.toUpperCase().indexOf(filter) > -1 || ifsc.toUpperCase().indexOf(filter1) > -1 || 
+	    		  bankid.toUpperCase().indexOf(filter1) > -1 || branch.toUpperCase().indexOf(filter1) > -1 ||
+	    		  address.toUpperCase().indexOf(filter1) > -1 || city.toUpperCase().indexOf(filter1) > -1 ||
+	    		  district.toUpperCase().indexOf(filter1) > -1 || state.toUpperCase().indexOf(filter1) > -1 ||
+	    		  bankname.toUpperCase().indexOf(filter1) > -1|| ifsc.toUpperCase().indexOf(filter2) > -1 || 
+	    		  bankid.toUpperCase().indexOf(filter2) > -1 || branch.toUpperCase().indexOf(filter2) > -1 ||
+	    		  address.toUpperCase().indexOf(filter2) > -1 || city.toUpperCase().indexOf(filter2) > -1 ||
+	    		  district.toUpperCase().indexOf(filter2) > -1 || state.toUpperCase().indexOf(filter2) > -1 ||
+	    		  bankname.toUpperCase().indexOf(filter2) > -1  ) { 
+			
+	        tr[i].style.display = "";
+	      } else {
+	        tr[i].style.display = "none";
+	      }
+		  
+		  
+	    }       
+	  }
+} 
+
+</script>
+</head>
+
+<body>
+<br><br><br>
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Bank..." title="Type in a name">  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+ <select id="mySelect" onchange="myFunction()"> 
+<option value="Address">Addresses</option>
+  <option value="MUMBAI">MUMBAI</option>
+  <option value="VIJAYAWADA">VIJAYAWADA</option>
+  <option value="HYDERABAD">HYDERABAD</option>
+  <option value="VIZAG">VIZAG</option>
+    <option value="BANGALORE">BANGALORE</option>
+</select>  &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+<select id="mySelect1" onchange="myFunction()"> 
+<option value="Address">Favourites</option>
+  <option value="MUMBAI">MUMBAI</option>
+  <option value="VIJAYAWADA">VIJAYAWADA</option>
+  <option value="HYDERABAD">HYDERABAD</option>
+  <option value="VIZAG">VIZAG</option>
+    <option value="BANGALORE">BANGALORE</option>
+</select> 
+<div id="container"><h2>  </h2>
+
+</div>
+
+
+<div class="center">
+  <div class="pagination">
+  <a href="#">&laquo;</a>
+  <a href="#" class="active">1</a>
+  <a href="#" >2</a>
+  <a href="#">3</a>
+  <a href="#">4</a>
+  <a href="#">5</a>
+  <a href="#">6</a>
+  <a href="#">&raquo;</a>
+  </div>
+</div>    
+</body>
+</html>
