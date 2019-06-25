@@ -1,0 +1,2 @@
+# Bank-Search
+Firstly, home.html is the home page, in that after clicking "Click Me!!" button it redirects to index.html. index.html is a page  which shows details about the bank.In index.html,user can search about banks without using search button.user can see favorites and address of banks with a drop down.If search result exists in the data page then it will show the corresponding data as result,if not it won't show anything related to the search.
